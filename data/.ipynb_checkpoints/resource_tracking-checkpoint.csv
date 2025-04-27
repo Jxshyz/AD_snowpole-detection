@@ -1,2 +1,2 @@
 Date,Time,Stage,Duration (s),Energy (Wh),Avg Memory (MB),GPU,GPU Mem (MB),CPU
-2025-04-22,20:25,Data analysis,1.12,0.125,3647.68,NVIDIA GeForce RTX 4090,24564,x86_64
+2025-04-25,00:46,Data analysis,1.18,0.131,9647.96,NVIDIA GeForce RTX 4090,24564,x86_64

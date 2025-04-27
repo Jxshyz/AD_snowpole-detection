@@ -1,0 +1,7 @@
+train: /datasets/tdt4265/ad/open/Poles/rgb/images/train
+val: /datasets/tdt4265/ad/open/Poles/rgb/images/valid
+test: /datasets/tdt4265/ad/open/Poles/rgb/images/test
+
+nc: 1
+names: ['pole']
+

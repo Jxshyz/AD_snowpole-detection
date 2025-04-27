@@ -12,6 +12,6 @@ Corrupted images: 0
 -----------------------------------------------------------
 Sampled images: 5
 Label files found: 5
-Average number of boxes per sampled image: 1.00
-Bounding Box width (px): mean = 14.5, std = 4.9
-Bounding Box height (px): mean = 182.9, std = 134.7
+Average number of boxes per sampled image: 1.20
+Bounding Box width (px): mean = 20.1, std = 8.2
+Bounding Box height (px): mean = 137.8, std = 56.9

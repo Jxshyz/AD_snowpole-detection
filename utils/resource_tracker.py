@@ -8,7 +8,6 @@ from pathlib import Path
 
 try:
     import pynvml
-
     pynvml.nvmlInit()
     GPU_AVAILABLE = True
 except ImportError:
@@ -16,8 +15,16 @@ except ImportError:
 
 # Constants for estimation
 TDP_WATTS = 400
-TRACKING_PATH = Path("./data/resource_tracking.csv")
+
+# ✅ Full absolute-safe path
+TRACKING_PATH = Path(__file__).resolve().parent.parent / "data" / "resource_tracking.csv"
 TRACKING_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+# ✅ Force-create file with headers if missing
+if not TRACKING_PATH.exists():
+    with open(TRACKING_PATH, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Date", "Time", "Stage", "Duration (s)", "Energy (Wh)", "Avg Memory (MB)", "GPU", "GPU Mem (MB)", "CPU"])
 
 
 def _get_gpu_info():
@@ -38,19 +45,17 @@ def _get_cpu_info():
 
 def track(stage: str):
     start_time = time.time()
-
-    # Record initial memory
     mem_before = psutil.virtual_memory().used
 
     print(f"[Tracking] Started: {stage}")
 
-    def stop_tracking():
+    def stop_tracking(return_stats=False):
         end_time = time.time()
         mem_after = psutil.virtual_memory().used
 
-        duration = end_time - start_time  # seconds
-        avg_memory = ((mem_before + mem_after) / 2) / (1024 * 1024)  # in MB
-        energy_wh = (TDP_WATTS * duration) / 3600  # Convert to watt-hours
+        duration = end_time - start_time
+        avg_memory = ((mem_before + mem_after) / 2) / (1024 * 1024)
+        energy_wh = (TDP_WATTS * duration) / 3600
 
         now = datetime.datetime.now()
         gpu_name, gpu_memory = _get_gpu_info()
@@ -68,6 +73,8 @@ def track(stage: str):
             "CPU": cpu_info,
         }
 
+        print(f"[DEBUG] Saving to: {TRACKING_PATH}")
+
         file_exists = TRACKING_PATH.exists()
         with open(TRACKING_PATH, mode="a", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=row.keys())
@@ -77,4 +84,7 @@ def track(stage: str):
 
         print(f"[Tracking] Logged resource usage for: {stage}")
 
-    return stop_tracking  # Return a function to be called after the block ends
+        if return_stats:
+            return energy_wh, avg_memory
+
+    return stop_tracking

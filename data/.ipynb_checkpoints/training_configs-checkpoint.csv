@@ -1,0 +1,14 @@
+Type,Iteration,Date,Model,Epochs,Learning Rate,Mosaic,Optimizer
+grid,1,2025-04-26 13:59,yolov8n.pt,30,0.01,0.5,Adam
+grid,2,2025-04-26 14:01,yolov8n.pt,30,0.01,1.0,Adam
+grid,3,2025-04-26 14:02,yolov8n.pt,30,0.001,0.5,Adam
+grid,4,2025-04-26 14:03,yolov8n.pt,30,0.001,1.0,Adam
+grid,5,2025-04-26 14:17,yolov8n.pt,30,0.01,0.5,Adam
+grid,6,2025-04-26 14:19,yolov8n.pt,30,0.01,0.7,Adam
+grid,7,2025-04-26 14:21,yolov8n.pt,30,0.01,1.0,Adam
+grid,8,2025-04-26 14:22,yolov8n.pt,30,0.005,0.5,Adam
+grid,9,2025-04-26 14:24,yolov8n.pt,30,0.005,0.7,Adam
+grid,10,2025-04-26 14:26,yolov8n.pt,30,0.005,1.0,Adam
+grid,11,2025-04-26 14:27,yolov8n.pt,30,0.001,0.5,Adam
+grid,12,2025-04-26 14:30,yolov8n.pt,30,0.001,0.7,Adam
+grid,13,2025-04-26 14:33,yolov8n.pt,30,0.001,1.0,Adam
